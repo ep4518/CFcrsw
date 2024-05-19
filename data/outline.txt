@@ -1,0 +1,12 @@
+
+# Follow procedure as outlined in jupyter notebook
+
+ 1) Construct vstacked matrix
+    i) Cov matrix
+ 2) Perform Linalg Solver
+    i) Linear Algebra class
+        a) Matrix Inversion - Carefull around singularity
+        b) Transposition (Reuse C-code from Camb labs)
+        c) Matrix Multiplication
+ 3) Back-testing by moving forward w rolling window 12 at a time (100 - wide)
+    i) Target_return = np.linspace(0, 0.1, 21)

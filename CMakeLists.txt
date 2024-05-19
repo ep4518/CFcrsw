@@ -9,9 +9,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/data)
 
 # Add the executable
 add_executable(Coursework
-#        data/main.cpp
+        data/main.cpp
         data/csv.cpp
         data/read_data.cpp
+        data/linalg.cpp
 )
 
 # Copy asset_returns.csv to the build directory

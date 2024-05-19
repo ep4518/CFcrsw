@@ -1,10 +1,17 @@
 # ninja log v5
-1	37	1715939772905455039	build.ninja	8121f85330d295a9
-0	265	1715939365494380679	CMakeFiles/Coursework.dir/data/csv.cpp.o	51711700e6317a9d
-1	315	1715939365543759394	CMakeFiles/Coursework.dir/data/read_data.cpp.o	afae321b98c06a60
-315	356	1715939365586804821	Coursework	3d88b8e3f1bf0178
-1	37	1715939772905455039	build.ninja	8121f85330d295a9
-8	309	1715939800244989092	CMakeFiles/Coursework.dir/data/read_data.cpp.o	afae321b98c06a60
-309	349	1715939800286822479	Coursework	3d88b8e3f1bf0178
-7	323	1715939809588714237	CMakeFiles/Coursework.dir/data/read_data.cpp.o	afae321b98c06a60
-323	361	1715939809629457083	Coursework	3d88b8e3f1bf0178
+8	153	1716107638956452547	CMakeFiles/Coursework.dir/data/linalg.cpp.o	50eb153ee08868df
+0	36	1716107721907794948	build.ninja	8121f85330d295a9
+8	278	1716106240032219866	CMakeFiles/Coursework.dir/data/csv.cpp.o	51711700e6317a9d
+8	314	1716106240067871092	CMakeFiles/Coursework.dir/data/read_data.cpp.o	afae321b98c06a60
+153	190	1716107638995113016	Coursework	bddf54d31da1b0f5
+9	276	1716107609035482544	CMakeFiles/Coursework.dir/data/main.cpp.o	3d0f300d755a41b0
+8	172	1716107966220744054	CMakeFiles/Coursework.dir/data/linalg.cpp.o	50eb153ee08868df
+172	212	1716107966261591581	Coursework	bddf54d31da1b0f5
+8	177	1716108049362234980	CMakeFiles/Coursework.dir/data/linalg.cpp.o	50eb153ee08868df
+177	216	1716108049402616587	Coursework	bddf54d31da1b0f5
+12	194	1716112534467729063	CMakeFiles/Coursework.dir/data/linalg.cpp.o	50eb153ee08868df
+11	273	1716112534546137446	CMakeFiles/Coursework.dir/data/main.cpp.o	3d0f300d755a41b0
+273	319	1716112534594929410	Coursework	bddf54d31da1b0f5
+7	181	1716114452918464764	CMakeFiles/Coursework.dir/data/linalg.cpp.o	50eb153ee08868df
+7	260	1716114452997344926	CMakeFiles/Coursework.dir/data/main.cpp.o	3d0f300d755a41b0
+260	298	1716114453036819820	Coursework	bddf54d31da1b0f5
