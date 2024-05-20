@@ -1,6 +1,7 @@
 #include "linalg.h"
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 //#include <cstddef>
 
 Matrix Matrix::transpose() {
@@ -25,25 +26,22 @@ Matrix Matrix::solver(const Matrix &b) const {
     }
     // requires positive semi-definite matrix.
     // computationally expensive to calculate eigenvaules so checked in calculation    Matrix x(rows, 1);  // Initial guess (zero vector)
+    int k = 0;
+    double a, B;
+    Matrix x(Lattice(rows, Vector(1, 0.5)));  // Initial guess (zero vector)
+    Matrix s = b - (*this) * x; // Initial residual
+    Matrix sOld = s;
+    Matrix p = s;  // Residual vector
 
-    Matrix x(rows, 1);  // Initial guess (zero vector)
-    Matrix r = b;  // Residual vector
-    Matrix p = r;  // Search direction
-    Matrix Ap(rows, 1);
-    double rsold = r.dot(r);
-
-    for (int i = 0; i < rows; ++i) {
-        Ap = (*this) * p;
-        double alpha = rsold / p.dot(Ap);
-        x = x + (alpha * p);
-        r = r - (alpha * Ap);
-        double rsnew = r.dot(r);
-        if (std::sqrt(rsnew) < 1e-10) {
-            break;
-        }
-        p = r + ((rsnew / rsold) * p);
-        rsold = rsnew;
-    }
+    do {
+        a = s.dot(s) / p.dot((*this) * p);
+        x = x + (a * p);
+        sOld = s;
+        s = s - a * ((*this) * p);
+        B = s.dot(s) / sOld.dot(sOld);
+        p = s + B * p;
+        k++;
+    } while (s.dot(s) > 0.00001);
 
     return x;  // Return result as a column Matrix
 }
@@ -85,7 +83,7 @@ Matrix operator-(const Matrix& A, const Matrix& B) {
     Matrix result(A.getRows(), A.getColumns());
     for (int i = 0; i < A.getRows(); ++i) {
         for (int j = 0; j < A.getColumns(); ++j) {
-            result(i, j) = A(i, j) + B(i, j);
+            result(i, j) = A(i, j) - B(i, j);
         }
     }
     return result;

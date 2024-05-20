@@ -32,11 +32,11 @@ int  main (int  argc, char  *argv[])
 
 // Example usage
 int main() {
-
-    Matrix rowVector(Lattice(1, Vector(5, 0.0)));
-    Matrix columnVector(Lattice(5, Vector(1, 0.0)));
-    rowVector.prn();
-    rowVector.transpose().prn();
+//
+//    Matrix rowVector(Lattice(1, Vector(5, 0.0)));
+//    Matrix columnVector(Lattice(5, Vector(1, 0.0)));
+//    rowVector.prn();
+//    rowVector.transpose().prn();
 
     // Define a simple symmetric positive definite matrix A
     Lattice A_data = {
@@ -51,10 +51,18 @@ int main() {
             {6}
     };
     Matrix b(b_data);
+    Lattice tmp =
+    {
+        {1.0, 0.0},
+        {0.0, 1.0}
+    };
+    Matrix I(tmp);
 
-    // Solve the system Ax = b
-    Matrix x = A.solver(b);
-    x.prn();  // Print the solution vector
+    A.prn();
+    b.prn();
+    Matrix x  =  A.solver(b);
+    x.prn();
+//    (A - I).prn();
 
     return 0;
 }
