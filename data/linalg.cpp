@@ -3,137 +3,113 @@
 #include <stdexcept>
 //#include <cstddef>
 
-Matrixx Matrixx::transpose() {
-    Matrix transposed(columns, Vector(rows));
+Matrix Matrix::transpose() {
+    Lattice transposed(columns, Vector(rows));
     for (size_t i = 0; i < rows; ++i) {
         for (size_t j = 0; j < columns; ++j) {
             transposed[j][i] = M[i][j];
         }
     }
-    return {transposed};
+    return {transposed};    // Clang-Tidy: Avoid repeating the return type from the declaration; use a braced initializer list instead
 }
 
-/*Vector Matrixx::solver(Vector b) {
+// Conjugate Gradient Solver
+Matrix Matrix::solver(const Matrix &b) const {
     // requires non-singular matrix
     if (M.empty() || M[0].size() != M.size()) {
         throw std::invalid_argument("Matrix dimensions are not compatible for inversion");
     }
+    // check b is a column vector
+    if (b.getColumns() != 1 || b.getRows() != rows) {
+        throw std::invalid_argument("b must be a column vector with the same number of rows as the matrix.");
+    }
     // requires positive semi-definite matrix.
-    // computationally expensive to calculate eigenvaules so checked in calculation
-    int k;
-    double tol = 0.00001;  // Typical tolerance 10e − 6
-    Vector x0, s0, p0;  // Needs to be defined <========================
-    Vector x = x0, s = s0, p = p0, a, sOld, B;
+    // computationally expensive to calculate eigenvaules so checked in calculation    Matrix x(rows, 1);  // Initial guess (zero vector)
 
-    do {
-        a = s.transpose() * s / p.transpose() * M * p;
-        x = x + a * p;
-        sOld = s;
-        s = s - a * M * p;
-        B = s.transpose() * s / sOld.transpose() * sOld;
-        p = s + B * p;
-        k+=1;
-    } while (sOld.tranpsose()*sOld <= tol);    // Do we need a vector class that is child of matrix?
+    Matrix x(rows, 1);  // Initial guess (zero vector)
+    Matrix r = b;  // Residual vector
+    Matrix p = r;  // Search direction
+    Matrix Ap(rows, 1);
+    double rsold = r.dot(r);
 
-    return {x};
-}*/
-
-Matrixx operator*(const Matrix& A, const Matrix& B) {
-    if (A.empty() || B.empty() || A[0].size() != B.size()) {
-        throw std::invalid_argument("Matrix dimensions are not compatible for multiplication");
+    for (int i = 0; i < rows; ++i) {
+        Ap = (*this) * p;
+        double alpha = rsold / p.dot(Ap);
+        x = x + (alpha * p);
+        r = r - (alpha * Ap);
+        double rsnew = r.dot(r);
+        if (std::sqrt(rsnew) < 1e-10) {
+            break;
+        }
+        p = r + ((rsnew / rsold) * p);
+        rsold = rsnew;
     }
 
-    size_t rows = A.size();
-    size_t cols = B[0].size();
-    size_t common_dim = B.size();
+    return x;  // Return result as a column Matrix
+}
 
-    Matrix result(rows, std::vector<double>(cols, 0.0));
-
-    for (size_t i = 0; i < rows; ++i) {
-        for (size_t j = 0; j < cols; ++j) {
-            for (size_t k = 0; k < common_dim; ++k) {
-                result[i][j] += A[i][k] * B[k][j];
+// Matrix multiplication
+Matrix operator*(const Matrix& A, const Matrix& B) {
+    if (A.getColumns() != B.getRows()) {
+        throw std::invalid_argument("Matrix dimensions must agree for multiplication.");
+    }
+    Matrix result(A.getRows(), B.getColumns());
+    for (int i = 0; i < A.getRows(); ++i) {
+        for (int j = 0; j < B.getColumns(); ++j) {
+            for (int k = 0; k < A.getColumns(); ++k) {
+                result(i, j) += A(i, k) * B(k, j);
             }
         }
     }
     return result;
 }
 
-Matrixx operator+(const Matrix& A, const Matrix& B) {
-    if (A.size() != B.size() || A[0].size() != B[0].size()) {
-        throw std::invalid_argument("Matrix dimensions are not compatible for addition");
+// Matrix addition/ subtraction
+Matrix operator+(const Matrix& A, const Matrix& B) {
+    if (A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) {
+        throw std::invalid_argument("Matrix dimensions must agree for addition.");
     }
-
-    size_t rows = A.size();
-    size_t cols = A[0].size();
-
-    Matrix result(rows, std::vector<double>(cols));
-
-    for (size_t i = 0; i < rows; ++i) {
-        for (size_t j = 0; j < cols; ++j) {
-            result[i][j] = A[i][j] + B[i][j];
+    Matrix result(A.getRows(), A.getColumns());
+    for (int i = 0; i < A.getRows(); ++i) {
+        for (int j = 0; j < A.getColumns(); ++j) {
+            result(i, j) = A(i, j) + B(i, j);
         }
     }
     return result;
 }
 
-/*Vector operator*(const Matrix& C,const Vector& V)
-{
-    int d = C.size();
-    Vector W(d);
-    for (int j=0; j<d; j++)
-    {
-        W[j]=0.0;
-        for (int l=0; l<d; l++) W[j]=W[j]+C[j][l]*V[l];
+Matrix operator-(const Matrix& A, const Matrix& B) {
+    if (A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) {
+        throw std::invalid_argument("Matrix dimensions must agree for addition.");
     }
-    return W;
+    Matrix result(A.getRows(), A.getColumns());
+    for (int i = 0; i < A.getRows(); ++i) {
+        for (int j = 0; j < A.getColumns(); ++j) {
+            result(i, j) = A(i, j) + B(i, j);
+        }
+    }
+    return result;
 }
 
-Vector operator+(const Vector& V,const Vector& W)
-{
-    int d = V.size();
-    Vector U(d);
-    for (int j=0; j<d; j++) U[j] = V[j] + W[j];
-    return U;
+// Scalar multiplication
+Matrix operator*(const double& a, const Matrix& A) {
+    Matrix result(A.getRows(), A.getColumns());
+    for (int i = 0; i < A.getRows(); ++i) {
+        for (int j = 0; j < A.getColumns(); ++j) {
+            result(i, j) = a * A(i, j);
+        }
+    }
+    return result;
 }
 
-Vector operator+(const double& a,const Vector& V)
-{
-    int d = V.size();
-    Vector U(d);
-    for (int j=0; j<d; j++) U[j] = a + V[j];
-    return U;
+// Dot product of two column matrices
+double Matrix::dot(const Matrix& A) const {
+    if (columns != 1 || A.getColumns() != 1 || rows != A.getRows()) {
+        throw std::invalid_argument("Dot product requires column matrices of the same size.");
+    }
+    double result = 0.0;
+    for (int i = 0; i < rows; ++i) {
+        result += M[i][0] * A(i, 0);
+    }
+    return result;
 }
-
-Vector operator*(const double& a,const Vector& V)
-{
-    int d = V.size();
-    Vector U(d);
-    for (int j=0; j<d; j++) U[j] = a*V[j];
-    return U;
-}
-
-Vector operator*(const Vector& V,const Vector& W)
-{
-    int d = V.size();
-    Vector U(d);
-    for (int j=0; j<d; j++) U[j] = V[j] * W[j];
-    return U;
-}
-
-Vector exp(const Vector& V)
-{
-    int d = V.size();
-    Vector U(d);
-    for (int j=0; j<d; j++) U[j] = exp(V[j]);
-    return U;
-}
-
-double operator^(const Vector& V,const Vector& W)
-{
-    double sum = 0.0;
-    int d = V.size();
-    for (int j=0; j<d; j++) sum = sum + V[j]*W[j];
-    return sum;
-}*/
-
