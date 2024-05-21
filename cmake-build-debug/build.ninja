@@ -77,6 +77,13 @@ build CMakeFiles/Coursework.dir/data/linalg.cpp.o: CXX_COMPILER__Coursework_unsc
   OBJECT_DIR = CMakeFiles/Coursework.dir
   OBJECT_FILE_DIR = CMakeFiles/Coursework.dir/data
 
+build CMakeFiles/Coursework.dir/data/Markowitz.cpp.o: CXX_COMPILER__Coursework_unscanned_Debug /Users/Edward/Library/CloudStorage/OneDrive-ImperialCollegeLondon/Documents/Computational$ Finance$ C++/Coursework/data/Markowitz.cpp || cmake_object_order_depends_target_Coursework
+  DEP_FILE = CMakeFiles/Coursework.dir/data/Markowitz.cpp.o.d
+  FLAGS = -g -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  INCLUDES = -I"/Users/Edward/Library/CloudStorage/OneDrive-ImperialCollegeLondon/Documents/Computational Finance C++/Coursework/data"
+  OBJECT_DIR = CMakeFiles/Coursework.dir
+  OBJECT_FILE_DIR = CMakeFiles/Coursework.dir/data
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Coursework
@@ -85,7 +92,7 @@ build CMakeFiles/Coursework.dir/data/linalg.cpp.o: CXX_COMPILER__Coursework_unsc
 #############################################
 # Link the executable Coursework
 
-build Coursework: CXX_EXECUTABLE_LINKER__Coursework_Debug CMakeFiles/Coursework.dir/data/main.cpp.o CMakeFiles/Coursework.dir/data/csv.cpp.o CMakeFiles/Coursework.dir/data/read_data.cpp.o CMakeFiles/Coursework.dir/data/linalg.cpp.o
+build Coursework: CXX_EXECUTABLE_LINKER__Coursework_Debug CMakeFiles/Coursework.dir/data/main.cpp.o CMakeFiles/Coursework.dir/data/csv.cpp.o CMakeFiles/Coursework.dir/data/read_data.cpp.o CMakeFiles/Coursework.dir/data/linalg.cpp.o CMakeFiles/Coursework.dir/data/Markowitz.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk
   OBJECT_DIR = CMakeFiles/Coursework.dir
   POST_BUILD = :

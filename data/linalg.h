@@ -1,3 +1,4 @@
+// linalg.h
 #ifndef _LINALG_H
 #define _LINALG_H
 
@@ -12,6 +13,9 @@ private:
     int rows, columns;
     Lattice M;
 public:
+    // Default constructor
+    Matrix() : rows(0), columns(0), M() {}
+
     // Construct from pre-existing Matrix
     Matrix(Lattice _M) {M = _M; rows = _M.size(); columns = _M[0].size();}
 
@@ -20,6 +24,17 @@ public:
 
     // Access element (const version)
     const double& operator()(size_t i, size_t j) const { return M[i][j]; }
+
+    // Method to insert an element into the matrix
+    void insert(size_t i, size_t j, double value) {
+        if (i >= rows || j >= columns) {
+            throw std::out_of_range("Matrix indices out of range");
+        }
+        M[i][j] = value;
+    }
+
+    // pandas like shape method
+    void shape() {printf("(%d, %d)\n",rows, columns);}
 
     // Get number of rows
     int getRows() const { return rows; }
@@ -35,6 +50,18 @@ public:
         if (i >= rows || j >= columns) throw std::out_of_range("Matrix indices out of range");
         return M[i][j];
     }
+
+    // Unary - operator for matrix
+    Matrix operator-() const {
+        Matrix result(rows, columns);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
+                result(i, j) = -M[i][j];
+            }
+        }
+        return result;
+    }
+
 
     Matrix transpose();
 
@@ -68,5 +95,9 @@ public:
         std::cout << "]\n";
     }
 };
+
+// hstack and vstack for constructing Q
+Matrix vstack(const Matrix &A, const Matrix &B, const Matrix &C);
+Matrix hstack(const Matrix &A, const Matrix &B, const Matrix &C);
 
 #endif

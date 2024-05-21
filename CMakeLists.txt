@@ -13,6 +13,7 @@ add_executable(Coursework
         data/csv.cpp
         data/read_data.cpp
         data/linalg.cpp
+        data/Markowitz.cpp
 )
 
 # Copy asset_returns.csv to the build directory

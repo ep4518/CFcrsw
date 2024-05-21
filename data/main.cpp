@@ -1,8 +1,9 @@
+// main.cpp
 #include "read_data.h"
 #include "linalg.h"
+#include "Markowitz.h"
 #include <iostream>
 using namespace std;
-/*
 int  main (int  argc, char  *argv[])
 {
 
@@ -14,23 +15,25 @@ int  main (int  argc, char  *argv[])
     string fileName="asset_returns.csv";
     readData(returnMatrix,fileName);          // returnMatrix[i][j] stores the asset i, return j value
 
-*//*    //example on how to calculate the average return
-    double mean=0;
-    for(int i=0;i<numberAssets;i++){
-        mean=0;
-        for(int j=0;j<numberReturns;j++)
-        {
-            double temp=returnMatrix[i][j];
-//        cout << "Asset " << i << ", Return "<<i<<"="<< temp<<"\n";
-            mean=mean+temp/numberReturns;
-        }
-    }
-*//*
+    Matrix daily_returns(returnMatrix);
+
+    Lattice tr =  {
+            {0.   , 0.005, 0.01 , 0.015, 0.02 , 0.025, 0.03 , 0.035, 0.04 ,
+            0.045, 0.05 , 0.055, 0.06 , 0.065, 0.07 , 0.075, 0.08 , 0.085,
+            0.09 , 0.095, 0.1}
+    };
+
+    Matrix target_returns(tr);
+
+    Markowitz seven00(daily_returns, target_returns);
+    Matrix results = seven00.results();
+    results.shape();
+
     return 0;
-}*/
+}
 
 
-// Example usage
+/*// Example usage
 int main() {
 //
 //    Matrix rowVector(Lattice(1, Vector(5, 0.0)));
@@ -62,7 +65,6 @@ int main() {
     b.prn();
     Matrix x  =  A.solver(b);
     x.prn();
-//    (A - I).prn();
 
     return 0;
-}
+}*/
