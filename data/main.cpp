@@ -26,8 +26,8 @@ int  main (int  argc, char  *argv[])
     Matrix target_returns(tr);
 
     Markowitz seven00(daily_returns, target_returns);
-    Matrix results = seven00.results();
-    results.shape();
+    Matrix results = seven00.Q();
+    results.prn();
 
     return 0;
 }

@@ -1,4 +1,3 @@
-//// Markowitz.cpp
 #include "Markowitz.h"
 #include <iostream>
 
@@ -51,19 +50,20 @@ Matrix Markowitz::b(const double &target_return) {
     Matrix zeros(Lattice(returns.getRows(), Vector(1, 0.0)));
     Matrix ret(Lattice(1, Vector(1, target_return)));
     Matrix one(Lattice(1, Vector(1, 1.0)));
-    Matrix b = vstack(zeros, ret, one);
+    Matrix b = vstack(zeros, ret, -one);
     return b;
 }
 
 Matrix Markowitz::results() {
-    int m = target_returns.getColumns();  // Number of target returns
-    int n = returns.getRows();  // Number of assets
-    Matrix results(m, n + 2);  // Initialize results matrix with correct dimensions
+    int m = target_returns.getColumns();
+    Matrix results(m, this->n + 2);  // Initialize results matrix with correct dimensions
+
     for (int i = 0; i < m; i++) {
-        Matrix x = this->Q().solver(this->b(target_returns(i, 0)));
-        for (int j = 0; j < n + 2; j++) {
+        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
+        for (int j = 0; j < this->n + 2; j++) {
             results.insert(i, j, x(j, 0));
         }
     }
+
     return results;
 }
