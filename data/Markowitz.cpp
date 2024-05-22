@@ -55,15 +55,16 @@ Matrix Markowitz::b(const double &target_return) {
 }
 
 Matrix Markowitz::weights() {
-    int m = target_returns.getColumns();
-    Matrix results(m, this->n + 2);  // Initialize results matrix with correct dimensions
-
-    for (int i = 0; i < m; i++) {
-        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
-        for (int j = 0; j < this->n + 2; j++) {
-            results.insert(i, j, x(j, 0));
-        }
-    }
-
-    return results;
+//    int m = target_returns.getColumns();
+//    Matrix results(m, this->n + 2);
+//
+//    for (int i = 0; i < m; i++) {
+//        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
+//        for (int j = 0; j < this->n + 2; j++) {
+//            results.insert(i, j, x(j, 0));
+//        }
+//    }
+//    return results;
+    Matrix result = this->Q().solver(this->b(0.03));
+    return result;
 }

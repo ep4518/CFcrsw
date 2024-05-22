@@ -1,0 +1,35 @@
+/*// Example usage
+int main() {
+//
+//    Matrix rowVector(Lattice(1, Vector(5, 0.0)));
+//    Matrix columnVector(Lattice(5, Vector(1, 0.0)));
+//    rowVector.prn();
+//    rowVector.transpose().prn();
+
+    // Define a simple symmetric positive definite matrix A
+    Lattice A_data = {
+            {2, 1},
+            {1, 2}
+    };
+    Matrix A(A_data);
+
+    // Define the vector b
+    Lattice b_data = {
+            {5},
+            {6}
+    };
+    Matrix b(b_data);
+    Lattice tmp =
+    {
+        {1.0, 0.0},
+        {0.0, 1.0}
+    };
+    Matrix I(tmp);
+
+    A.prn();
+    b.prn();
+    Matrix x  =  A.solver(b);
+    x.prn();
+
+    return 0;
+}*/

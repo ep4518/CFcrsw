@@ -25,8 +25,6 @@ int  main (int  argc, char  *argv[])
     readData(returnMatrix,fileName);          // returnMatrix[i][j] stores the asset i, return j value
 
     Matrix daily_returns(returnMatrix); // Assets - r * Days - c == 83 * 700
-    Matrix daily_returns_test = daily_returns(0,numberAssets, 0, 100);
-    Matrix daily_returns_OOS_test = daily_returns(0, numberAssets, 100, 112);
 
     Lattice tr =  {
             {0.   , 0.005, 0.01 , 0.015, 0.02 , 0.025, 0.03 , 0.035, 0.04 ,
@@ -36,23 +34,26 @@ int  main (int  argc, char  *argv[])
 
     Matrix target_returns(tr);
 
-    Result results[50];
-    for (int i = 0; i < numberReturns - 100; i += 12) {
-        int index = int(i/12);
-        int start = index, mid = index + 100, end = index + 112;
-        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
-        Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
-        Markowitz portfolio(daily_returns_IS, target_returns);
-        Matrix df_optimal_weights = portfolio.weights();
-        Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
-        results[index] = {
-                index,
-                df_act_returns,
-                df_optimal_weights
-        };
-    }
+    Markowitz portfolio(daily_returns,target_returns);
+    portfolio.weights().prn();
 
-    results[49].back_test.prn();
+//    Result results[50];
+//    for (int i = 0; i < numberReturns - 100; i += 12) {
+//        int index = int(i/12);
+//        int start = index, mid = index + 100, end = index + 112;
+//        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
+//        Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
+//        Markowitz portfolio(daily_returns_IS, target_returns);
+//        Matrix df_optimal_weights = portfolio.weights();
+//        Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
+//        results[index] = {
+//                index,
+//                df_act_returns,
+//                df_optimal_weights
+//        };
+//    }
+//
+//    results[49].back_test.prn();
 
     return 0;
 }
@@ -78,38 +79,3 @@ Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, co
     }
     return results;
 }
-/*// Example usage
-int main() {
-//
-//    Matrix rowVector(Lattice(1, Vector(5, 0.0)));
-//    Matrix columnVector(Lattice(5, Vector(1, 0.0)));
-//    rowVector.prn();
-//    rowVector.transpose().prn();
-
-    // Define a simple symmetric positive definite matrix A
-    Lattice A_data = {
-            {2, 1},
-            {1, 2}
-    };
-    Matrix A(A_data);
-
-    // Define the vector b
-    Lattice b_data = {
-            {5},
-            {6}
-    };
-    Matrix b(b_data);
-    Lattice tmp =
-    {
-        {1.0, 0.0},
-        {0.0, 1.0}
-    };
-    Matrix I(tmp);
-
-    A.prn();
-    b.prn();
-    Matrix x  =  A.solver(b);
-    x.prn();
-
-    return 0;
-}*/

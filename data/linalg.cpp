@@ -11,7 +11,7 @@ Matrix Matrix::transpose() {
             transposed[j][i] = M[i][j];
         }
     }
-    return {transposed};    // Clang-Tidy: Avoid repeating the return type from the declaration; use a braced initializer list instead
+    return {transposed};    // Clang-Tidy: Avoid repeating the return type from the declaration
 }
 
 // Conjugate Gradient Solver
@@ -26,24 +26,22 @@ Matrix Matrix::solver(const Matrix &b) const {
     }
     // requires positive semi-definite matrix.
     // computationally expensive to calculate eigenvaules so checked in calculation    Matrix x(rows, 1);  // Initial guess (zero vector)
-    int k = 0;
-    double a, B;
+    double a, rsnew, rsold;
     Matrix x(Lattice(rows, Vector(1, 0.5)));  // Initial guess (zero.5 vector)
-    Matrix s = b - (*this) * x; // Initial residual
-    Matrix sOld = s;
-    Matrix p = s;  // Residual vector
+    Matrix r = b - (*this) * x; // Initial residual
+    Matrix p = r;
+    rsold = r.dot(r);
 
     do {
-        a = s.dot(s) / p.dot((*this) * p);
+        a = r.dot(r) / p.dot((*this) * p);
         x = x + (a * p);
-        sOld = s;
-        s = s - a * ((*this) * p);
-        B = s.dot(s) / sOld.dot(sOld);
-        p = s + B * p;
-        k++;
-    } while (s.dot(s) > 0.00001);
+        r = r - a * ((*this) * p);
+        rsnew = r.dot(r);
+        p = r + (rsnew/ rsold) * p;
+        rsold = rsnew;
+    } while (rsnew > 0.00001);
 
-    return x;  // Return result as a column Matrix
+    return x;
 }
 
 // Matrix multiplication

@@ -28,7 +28,7 @@ public:
     // b Vector - Working
     Matrix b(const double &target_return);
 
-    // Results dataframe - Not Working
+    // weights dataframe - Not Working
     Matrix weights();
 
 };
