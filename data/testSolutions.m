@@ -1,4 +1,4 @@
-
+clc;
 clear;
 data=load('asset_returns.csv');
 assets=83;

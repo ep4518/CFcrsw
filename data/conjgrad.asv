@@ -2,10 +2,9 @@ function [x] = conjgrad(A, b, x)
     r = b - A * x;
     p = r;
     rsold = r' * r;
-    k = 0;
+    k =
 
     for i = 1:length(b)
-        k = k + 1;
         Ap = A * p;
         alpha = rsold / (p' * Ap);
         x = x + alpha * p;
@@ -13,9 +12,6 @@ function [x] = conjgrad(A, b, x)
         rsnew = r' * r;
         if sqrt(rsnew) < 1e-10
               break;
-        end
-        if k >= 5
-            break;
         end
         p = r + (rsnew / rsold) * p;
         rsold = rsnew;

@@ -50,21 +50,20 @@ Matrix Markowitz::b(const double &target_return) {
     Matrix zeros(Lattice(returns.getRows(), Vector(1, 0.0)));
     Matrix ret(Lattice(1, Vector(1, target_return)));
     Matrix one(Lattice(1, Vector(1, 1.0)));
-    Matrix b = vstack(zeros, ret, -one);
+    Matrix b = vstack(zeros, -ret, -one);
     return b;
 }
 
 Matrix Markowitz::weights() {
-//    int m = target_returns.getColumns();
-//    Matrix results(m, this->n + 2);
-//
-//    for (int i = 0; i < m; i++) {
-//        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
-//        for (int j = 0; j < this->n + 2; j++) {
-//            results.insert(i, j, x(j, 0));
-//        }
-//    }
-//    return results;
-    Matrix result = this->Q().solver(this->b(0.03));
-    return result;
+    int m = target_returns.getColumns();
+    Matrix results(m, this->n + 2);
+
+    for (int i = 0; i < m; i++) {
+        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
+        for (int j = 0; j < this->n + 2; j++) {
+            results.insert(i, j, x(j, 0));
+        }
+    }
+    return results;
 }
+

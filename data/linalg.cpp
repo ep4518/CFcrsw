@@ -2,44 +2,43 @@
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
-//#include <cstddef>
 
-Matrix Matrix::transpose() {
+// Transpose of the matrix
+Matrix Matrix::transpose() const {
     Lattice transposed(columns, Vector(rows));
     for (size_t i = 0; i < rows; ++i) {
         for (size_t j = 0; j < columns; ++j) {
             transposed[j][i] = M[i][j];
         }
     }
-    return {transposed};    // Clang-Tidy: Avoid repeating the return type from the declaration
+    return {transposed};
 }
 
 // Conjugate Gradient Solver
 Matrix Matrix::solver(const Matrix &b) const {
-    // requires non-singular matrix
-    if (M.empty() || M[0].size() != M.size()) {
+    if (M.empty() || rows != columns) {
         throw std::invalid_argument("Matrix dimensions are not compatible for inversion");
     }
-    // check b is a column vector
     if (b.getColumns() != 1 || b.getRows() != rows) {
         throw std::invalid_argument("b must be a column vector with the same number of rows as the matrix.");
     }
-    // requires positive semi-definite matrix.
-    // computationally expensive to calculate eigenvaules so checked in calculation    Matrix x(rows, 1);  // Initial guess (zero vector)
-    double a, rsnew, rsold;
-    Matrix x(Lattice(rows, Vector(1, 0.5)));  // Initial guess (zero.5 vector)
-    Matrix r = b - (*this) * x; // Initial residual
-    Matrix p = r;
-    rsold = r.dot(r);
 
-    do {
-        a = r.dot(r) / p.dot((*this) * p);
-        x = x + (a * p);
-        r = r - a * ((*this) * p);
+    Matrix x(Lattice(rows, Vector(1, 1.0)));
+    Matrix r = b - (*this) * x;
+    Matrix p = r;
+    double rsold = r.dot(r);
+    double rsnew;
+
+    for (int k = 0; k < b.getRows(); ++k) {
+        Matrix Ap = (*this) * p;
+        double alpha = rsold / p.dot(Ap);
+        x = x + alpha * p;
+        r = r - alpha * Ap;
         rsnew = r.dot(r);
-        p = r + (rsnew/ rsold) * p;
+        if (std::sqrt(rsnew) < 1e-6) break;
+        p = r + (rsnew / rsold) * p;
         rsold = rsnew;
-    } while (rsnew > 0.00001);
+    }
 
     return x;
 }
@@ -60,7 +59,7 @@ Matrix operator*(const Matrix& A, const Matrix& B) {
     return result;
 }
 
-// Matrix addition/ subtraction
+// Matrix addition
 Matrix operator+(const Matrix& A, const Matrix& B) {
     if (A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) {
         throw std::invalid_argument("Matrix dimensions must agree for addition.");
@@ -74,9 +73,10 @@ Matrix operator+(const Matrix& A, const Matrix& B) {
     return result;
 }
 
+// Matrix subtraction
 Matrix operator-(const Matrix& A, const Matrix& B) {
     if (A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) {
-        throw std::invalid_argument("Matrix dimensions must agree for addition.");
+        throw std::invalid_argument("Matrix dimensions must agree for subtraction.");
     }
     Matrix result(A.getRows(), A.getColumns());
     for (int i = 0; i < A.getRows(); ++i) {
@@ -110,10 +110,10 @@ double Matrix::dot(const Matrix& A) const {
     return result;
 }
 
-// vertical stack three matrices
+// Vertical stack of three matrices
 Matrix vstack(const Matrix &A, const Matrix &B, const Matrix &C) {
     if (A.getColumns() != B.getColumns() || A.getColumns() != C.getColumns()) {
-        throw std::invalid_argument("vstack requires matrices of the same width (h * w).");
+        throw std::invalid_argument("vstack requires matrices of the same width.");
     }
     int h = A.getRows() + B.getRows() + C.getRows();
     Matrix result(h, A.getColumns());
@@ -136,34 +136,28 @@ Matrix vstack(const Matrix &A, const Matrix &B, const Matrix &C) {
     return result;
 }
 
-// horizontal stack three matrices
+// Horizontal stack of three matrices
 Matrix hstack(const Matrix &A, const Matrix &B, const Matrix &C) {
     if (A.getRows() != B.getRows() || A.getRows() != C.getRows()) {
-        throw std::invalid_argument("hstack requires matrices of the same height (h * w).");
+        throw std::invalid_argument("hstack requires matrices of the same height.");
     }
     int w = A.getColumns() + B.getColumns() + C.getColumns();
     Matrix result(A.getRows(), w);
-    // Copy the elements of A into the result matrix
 
     for (int i = 0; i < A.getRows(); ++i) {
         for (int j = 0; j < A.getColumns(); ++j) {
             result(i, j) = A(i, j);
         }
     }
-
-    // Copy the elements of B into the result matrix
-    for (int i = 0; i < A.getRows(); ++i) {
+    for (int i = 0; i < B.getRows(); ++i) {
         for (int j = 0; j < B.getColumns(); ++j) {
             result(i, j + A.getColumns()) = B(i, j);
         }
     }
-
-    // Copy the elements of C into the result matrix
-    for (int i = 0; i < A.getRows(); ++i) {
+    for (int i = 0; i < C.getRows(); ++i) {
         for (int j = 0; j < C.getColumns(); ++j) {
             result(i, j + A.getColumns() + B.getColumns()) = C(i, j);
         }
     }
-
     return result;
 }

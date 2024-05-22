@@ -34,26 +34,24 @@ int  main (int  argc, char  *argv[])
 
     Matrix target_returns(tr);
 
-    Markowitz portfolio(daily_returns,target_returns);
-    portfolio.weights().prn();
+    Result results[50];
+    for (int i = 0; i < numberReturns - 100; i += 12) {
+        int index = int(i/12);
+        cout << "Moving to index " << index << endl;
+        int start = index, mid = index + 100, end = index + 112;
+        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
+        Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
+        Markowitz portfolio(daily_returns_IS, target_returns);
+        Matrix df_optimal_weights = portfolio.weights();
+        Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
+        results[index] = {
+                index,
+                df_act_returns,
+                df_optimal_weights
+        };
+    }
 
-//    Result results[50];
-//    for (int i = 0; i < numberReturns - 100; i += 12) {
-//        int index = int(i/12);
-//        int start = index, mid = index + 100, end = index + 112;
-//        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
-//        Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
-//        Markowitz portfolio(daily_returns_IS, target_returns);
-//        Matrix df_optimal_weights = portfolio.weights();
-//        Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
-//        results[index] = {
-//                index,
-//                df_act_returns,
-//                df_optimal_weights
-//        };
-//    }
-//
-//    results[49].back_test.prn();
+    results[49].back_test.prn();
 
     return 0;
 }

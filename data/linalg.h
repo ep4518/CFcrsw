@@ -78,7 +78,7 @@ public:
         return Matrix(result);
     }
 
-    Matrix transpose();
+    Matrix transpose() const;
 
     // Skip inversion. Utilise conjugate gradient algorithm (see .pdf/ wiki)
     // Mx = b => x*
@@ -108,6 +108,76 @@ public:
             std::cout << "]\n";
         }
         std::cout << "]\n";
+    }
+
+// LU Decomposition Solver
+    void luDecompose(Matrix& L, Matrix& U) const {
+        if (rows != columns) {
+            throw std::invalid_argument("Matrix must be square for LU decomposition.");
+        }
+        int n = rows;
+        L = Matrix(n, n);
+        U = *this;
+
+        for (int i = 0; i < n; ++i) {
+            for (int k = i; k < n; ++k) {
+                double sum = 0.0;
+                for (int j = 0; j < i; ++j) {
+                    sum += (L(i, j) * U(j, k));
+                }
+                U(i, k) -= sum;
+            }
+            for (int k = i; k < n; ++k) {
+                if (i == k) {
+                    L(i, i) = 1.0;
+                } else {
+                    double sum = 0.0;
+                    for (int j = 0; j < i; ++j) {
+                        sum += (L(k, j) * U(j, i));
+                    }
+                    L(k, i) = (U(k, i) - sum) / U(i, i);
+                }
+            }
+        }
+    }
+
+    Matrix forwardSubstitution(const Matrix& L, const Matrix& b) const {
+        int n = L.getRows();
+        Matrix y(n, 1);
+        for (int i = 0; i < n; ++i) {
+            double sum = 0.0;
+            for (int j = 0; j < i; ++j) {
+                sum += L(i, j) * y(j, 0);
+            }
+            y(i, 0) = (b(i, 0) - sum) / L(i, i);
+        }
+        return y;
+    }
+
+    Matrix backwardSubstitution(const Matrix& U, const Matrix& y) const {
+        int n = U.getRows();
+        Matrix x(n, 1);
+        for (int i = n - 1; i >= 0; --i) {
+            double sum = 0.0;
+            for (int j = i + 1; j < n; ++j) {
+                sum += U(i, j) * x(j, 0);
+            }
+            x(i, 0) = (y(i, 0) - sum) / U(i, i);
+        }
+        return x;
+    }
+
+    Matrix solveLU(const Matrix& b) const {
+        if (b.getColumns() != 1 || b.getRows() != rows) {
+            throw std::invalid_argument("b must be a column vector with the same number of rows as the matrix.");
+        }
+
+        Matrix L, U;
+        luDecompose(L, U);
+
+        Matrix y = forwardSubstitution(L, b);
+        Matrix x = backwardSubstitution(U, y);
+        return x;
     }
 };
 
