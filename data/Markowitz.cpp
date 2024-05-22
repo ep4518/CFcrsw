@@ -54,7 +54,7 @@ Matrix Markowitz::b(const double &target_return) {
     return b;
 }
 
-Matrix Markowitz::results() {
+Matrix Markowitz::weights() {
     int m = target_returns.getColumns();
     Matrix results(m, this->n + 2);  // Initialize results matrix with correct dimensions
 

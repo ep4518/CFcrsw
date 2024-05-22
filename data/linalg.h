@@ -62,12 +62,27 @@ public:
         return result;
     }
 
+    // Splicing operator
+    Matrix operator()(int row_start, int row_end, int col_start, int col_end) const {
+        if (row_start < 0 || row_end > rows || col_start < 0 || col_end > columns) {
+            throw std::out_of_range("Index out of bounds");
+        }
+        Lattice result;
+        for (int i = row_start; i < row_end; ++i) {
+            Vector row;
+            for (int j = col_start; j < col_end; ++j) {
+                row.push_back(M[i][j]);
+            }
+            result.push_back(row);
+        }
+        return Matrix(result);
+    }
 
     Matrix transpose();
 
     // Skip inversion. Utilise conjugate gradient algorithm (see .pdf/ wiki)
     // Mx = b => x*
-    // https://en.wikipedia.org/wiki/Conjugate_gradient_method
+    //  https://en.wikipedia.org/wiki/Conjugate_gradient_method
     Matrix solver(const Matrix &b) const;
 
     // Matrix multiplication

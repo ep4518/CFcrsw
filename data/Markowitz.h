@@ -12,7 +12,7 @@ private:
 public:
     Markowitz(const Matrix &_returns, const Matrix &_target_returns) {
         if (_target_returns.getRows() != 1) {
-            throw std::invalid_argument("targer returns should be a column vector");
+            throw std::invalid_argument("target returns should be a column vector");
         }
         returns = _returns; target_returns = _target_returns, n = _returns.getRows();}
 
@@ -29,7 +29,7 @@ public:
     Matrix b(const double &target_return);
 
     // Results dataframe - Not Working
-    Matrix results();
+    Matrix weights();
 
 };
 

@@ -4,6 +4,15 @@
 #include "Markowitz.h"
 #include <iostream>
 using namespace std;
+
+Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, const Matrix &target_returns);
+
+struct Result {
+    int index;
+    Matrix back_test;
+    Matrix weights;
+};
+
 int  main (int  argc, char  *argv[])
 {
 
@@ -15,7 +24,9 @@ int  main (int  argc, char  *argv[])
     string fileName="asset_returns.csv";
     readData(returnMatrix,fileName);          // returnMatrix[i][j] stores the asset i, return j value
 
-    Matrix daily_returns(returnMatrix);
+    Matrix daily_returns(returnMatrix); // Assets - r * Days - c == 83 * 700
+    Matrix daily_returns_test = daily_returns(0,numberAssets, 0, 100);
+    Matrix daily_returns_OOS_test = daily_returns(0, numberAssets, 100, 112);
 
     Lattice tr =  {
             {0.   , 0.005, 0.01 , 0.015, 0.02 , 0.025, 0.03 , 0.035, 0.04 ,
@@ -25,14 +36,48 @@ int  main (int  argc, char  *argv[])
 
     Matrix target_returns(tr);
 
-    Markowitz seven00(daily_returns, target_returns);
-    Matrix results = seven00.Q();
-    results.prn();
+    Result results[50];
+    for (int i = 0; i < numberReturns - 100; i += 12) {
+        int index = int(i/12);
+        int start = index, mid = index + 100, end = index + 112;
+        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
+        Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
+        Markowitz portfolio(daily_returns_IS, target_returns);
+        Matrix df_optimal_weights = portfolio.weights();
+        Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
+        results[index] = {
+                index,
+                df_act_returns,
+                df_optimal_weights
+        };
+    }
+
+    results[49].back_test.prn();
 
     return 0;
 }
 
+Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, const Matrix &target_returns) {
+    int num_targ_rets = optimal_weights.getRows();
+    int num_assets = OOS_returns.getRows();
+    Markowitz OOS_rets(OOS_returns, target_returns);
+    // Create a result matrix to store performance for each set of weights
+    Matrix results(num_targ_rets, 3);
 
+    for (int i = 0; i < num_targ_rets; i++) {
+        // Extract the i-th row of optimal weights
+        Matrix optimal_weights_row(num_assets, 1);
+        for (int j = 0; j < num_assets; j++) {
+            optimal_weights_row.insert(j, 0, optimal_weights(i, j));
+        }
+        Matrix act_ave_return = OOS_rets.mean().transpose() * optimal_weights_row;
+        Matrix pf_cov = optimal_weights_row.transpose() * OOS_rets.cov() * optimal_weights_row;
+        results.insert(i, 0, target_returns(0,i));
+        results.insert(i, 1, act_ave_return(0,0));
+        results.insert(i, 2, pf_cov(0,0));
+    }
+    return results;
+}
 /*// Example usage
 int main() {
 //
