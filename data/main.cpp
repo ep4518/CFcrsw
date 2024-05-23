@@ -8,7 +8,6 @@
 using namespace std;
 
 Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, const Matrix &target_returns);
-std::string vectorToString(const std::vector<std::vector<double>>& vec);
 
 int  main (int  argc, char  *argv[])
 {
