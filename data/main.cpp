@@ -1,17 +1,14 @@
 // main.cpp
 #include "read_data.h"
+#include "write_data.h"
 #include "linalg.h"
 #include "Markowitz.h"
 #include <iostream>
+
 using namespace std;
 
 Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, const Matrix &target_returns);
-
-struct Result {
-    int index;
-    Matrix back_test;
-    Matrix weights;
-};
+std::string vectorToString(const std::vector<std::vector<double>>& vec);
 
 int  main (int  argc, char  *argv[])
 {
@@ -52,7 +49,9 @@ int  main (int  argc, char  *argv[])
         };
     }
 
-    results[49].back_test.prn();
+    results[0].back_test.prn();
+
+    write_data(results, 50);
 
     return 0;
 }
@@ -61,7 +60,7 @@ Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, co
     int num_targ_rets = optimal_weights.getRows();
     int num_assets = OOS_returns.getRows();
     Markowitz OOS_rets(OOS_returns, target_returns);
-    // Create a result matrix to store performance for each set of weights
+    // Result matrix to store performance for each set of weights
     Matrix results(num_targ_rets, 3);
 
     for (int i = 0; i < num_targ_rets; i++) {
