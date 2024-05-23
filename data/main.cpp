@@ -42,6 +42,7 @@ int  main (int  argc, char  *argv[])
         Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
         Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
         Markowitz portfolio(daily_returns_IS, target_returns);
+        portfolio.weights();
         Matrix df_optimal_weights = portfolio.weights();
         Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
         results[index] = {
