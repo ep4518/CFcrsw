@@ -9,6 +9,7 @@
 \input{includes} % various packages needed for maths etc.
 \input{notation} % short-hand notation and macros
 
+\usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, shapes.geometric}
@@ -21,25 +22,27 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document
 \section{Software Structure}
-
-There was no use of polymorphism.
+\textbf{\href{https://github.com/ep4518/CFcrsw}{www.github.com/ep4518/CFcrsw}}
 \begin{itemize}[nosep]
-    \item read\_data.h unchanged
-    \item defined type Vector and Lattice for vector$<$double$>$ and vector$<$vector$<$double$>$$>$
-    \item defined class Matrix for holding a lattice and implementing rudimentary linear algebra, multiple constructors e.g. Matrix(rows, columns) or Matrix(Lattice) or Matrix()
+    \item no use of polymorphism
+    \item read\_data.h and read\_data.cpp unchanged
+    \item defined type Vector and Lattice as vector$<$double$>$ and vector$<$vector$<$double$>$$>$
+    \item defined class ``Matrix" holds a lattice and implements rudimentary linear algebra with multiple constructors available e.g. (rows, columns), (Lattice), ().
     \begin{itemize}[nosep]
         \item operator overload for multiplication, addition, subtraction, unary negative and also for scalar equivalent operations
         \item operator overload for splcing, along with functionallity for insertion, printing, retrieval, shape etc.
-        \item Ultimately building towards implementing the Conjugate Gradient Descent Solver.
+        \item ultimately building towards implementing the Conjugate Gradient Descent Solver.
     \end{itemize}
-    \item implemented numpy like horizontal and vertical stacking of matrices
-    \item Markowitz class for defining a portfolio with optimal asset weights
+    \item implemented numpy-like horizontal and vertical stacking of Matrix triples
+    \item Markowitz class for defining a portfolio with optimal asset weightings
     \begin{itemize}[nosep]
         \item mean() - average returns for each asset over sample period - $\bar{r}_i = \frac{1}{n}\Sigma_{k=1}^n r_{i,k} $
         \item cov() - covariance of asset returns - $\Sigma_{ij} = \frac{1}{n - 1}\sum_{k=1}^n (r_{i,k} - \bar{r}_i)(r_{j,k} - \bar{r}_j)$
         \item b(double target\_return), Q() - vstack(hstack, hstack, hstack)
         \item optimal\_weights(): $Q x = b$
     \end{itemize}
+    \item backtesting function implemented for each iteration in the rolling window
+    \item write array of result structs in csv form for plotting with python - write\_data.h
 \end{itemize}
 
 \vspace{1cm}
@@ -95,11 +98,46 @@ There was no use of polymorphism.
 \draw[message] (sixth) -- node[] {} (third);
 \draw[message] (user) -- node[] {} (sixth);
 
-% \draw[message] (system) -- ++(0, -1) node[below] {response1};
-% \draw[message] (system) -- ++(0, -2) node[below] {action2};
-% \draw[message] (user) -- ++(0, -3) node[below] {response2};
-
 \end{tikzpicture}
+
+\section{Evaluation}
+
+\begin{figure}[htbp!]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png} % span 1.0 times the horizontal size of the page
+\caption{Realised Rolling Window Average OOS Return for each Target} 
+\label{fig:OOS_rets}
+\end{figure}
+
+
+Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for each target over the course of the backtest. There are 50 periods in the backtest, indexed on the x-axis of the plot. Out of Sample performance of the Markowtiz model is poor. The cumulative performance over the enitre domain is worse the larger the target return becomes. 
+
+
+In evaluating the accuracy of our Markowitz implementation, we compare with a quick numpy implementation in python, where the use of the linalg library provides a relaible yardstick with which to measure the accuracy of the CGD solver in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase.
+
+
+In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns consistent with the amount of risk taken by the investor (where the magnitude and direction of those returns are dictated by those of the market). 
+
+\begin{figure}[]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/Realised_Rolling_Window_Average_OOS_Return.png} % span 1.0 times the horizontal size of the page
+\caption{Realised Rolling Window Average OOS Return for each Target - Python} 
+\label{fig:OOS_rets_python}
+\end{figure}
+
+\begin{figure}[]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/efficint_frontier.png} % span 1.0 times the horizontal size of the page
+    \caption{} 
+\label{fig:efficint_frontier}
+\end{figure}
+
+\begin{figure}[]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/Cumulative_Rets.png} % span 1.0 times the horizontal size of the page
+\caption{} 
+\label{fig:Cumulative_Rets}
+\end{figure}
 
 \end{document}
 

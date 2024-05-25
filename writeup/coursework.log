@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.23)  23 MAY 2024 22:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.23)  25 MAY 2024 12:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1222,7 +1222,7 @@ shapes.geometric.code.tex
 File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))
 LaTeX Font Info:    Trying to load font information for OT1+bch on input line 1
-8.
+9.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/psnfss/ot1bch.fd
 File: ot1bch.fd 2004/10/18 font definitions for OT1/bch.
@@ -1235,48 +1235,48 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 (./coursework.aux)
 \openout1 = `coursework.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 18.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 19.
 LaTeX Font Info:    Trying to load font information for OML+jkp on input line 1
-8.
+9.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 19.
 LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 1
-8.
+9.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 19.
 LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 1
-8.
+9.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 19.
 LaTeX Font Info:    Trying to load font information for U+jkpexa on input line 
-18.
+19.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1331,14 +1331,14 @@ Package caption Info: End \AtBeginDocument code.
 \makeMPintoPDFobject=\count357
 \everyMPtoPDFconversion=\toks67
 )
-Package backref Info: ** backref set up for natbib ** on input line 18.
-Package hyperref Info: Link coloring ON on input line 18.
+Package backref Info: ** backref set up for natbib ** on input line 19.
+Package hyperref Info: Link coloring ON on input line 19.
  (./coursework.out) (./coursework.out)
 \@outlinefile=\write4
 \openout4 = `coursework.out'.
 
  (./titlepage.tex
-<./figures/imperial.pdf, id=11, 362.35374pt x 96.36pt>
+<./figures/imperial.pdf, id=15, 362.35374pt x 96.36pt>
 File: ./figures/imperial.pdf Graphic file (type pdf)
 <use ./figures/imperial.pdf>
 Package pdftex.def Info: ./figures/imperial.pdf  used on input line 11.
@@ -1359,76 +1359,111 @@ LaTeX Font Info:    Trying to load font information for TS1+bch on input line 2
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
 )
 LaTeX Font Info:    Trying to load font information for OT1+jkp on input line 2
-8.
+9.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
 File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
 )
 LaTeX Font Info:    Trying to load font information for U+jkpmia on input line 
-28.
+29.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
-28.
+29.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyb on input line 
-28.
+29.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 
-28.
+29.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 28
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 29
 .
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (7.28995pt too wide) in paragraph at lines 28--29
-[]\OT1/bch/m/n/12 defined type Vec-tor and Lat-tice for vector$\OML/jkp/m/it/12
- <$\OT1/bch/m/n/12 double$\OML/jkp/m/it/12 >$ \OT1/bch/m/n/12 and vector$\OML/j
-kp/m/it/12 <$\OT1/bch/m/n/12 vector$\OML/jkp/m/it/12 <$\OT1/bch/m/n/12 double$\
-OML/jkp/m/it/12 >$$>$ 
+Overfull \hbox (3.26996pt too wide) in paragraph at lines 29--30
+[]\OT1/bch/m/n/12 defined type Vec-tor and Lat-tice as vector$\OML/jkp/m/it/12 
+<$\OT1/bch/m/n/12 double$\OML/jkp/m/it/12 >$ \OT1/bch/m/n/12 and vector$\OML/jk
+p/m/it/12 <$\OT1/bch/m/n/12 vector$\OML/jkp/m/it/12 <$\OT1/bch/m/n/12 double$\O
+ML/jkp/m/it/12 >$$>$ 
  []
 
 
-Overfull \hbox (0.91716pt too wide) in paragraph at lines 32--33
+Overfull \hbox (0.91716pt too wide) in paragraph at lines 33--34
 []\OT1/bch/m/n/12 operator over-load for spl-c-ing, along with func-tion-al-lit
 y for in-ser-tion, print-
  []
 
-\tf@thm=\write5
-\openout5 = `coursework.thm'.
+<./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png, id=51, 1011.78pt
+ x 505.89pt>
+File: ./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png Graphic file
+ (type png)
+<use ./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png>
+Package pdftex.def Info: ./figures/Realised_Rolling_Window_Average_OOS_Return_c
+pp.png  used on input line 107.
+(pdftex.def)             Requested size: 438.17227pt x 219.08774pt.
+
+Underfull \vbox (badness 4108) has occurred while \output is active []
 
 LaTeX Font Info:    Trying to load font information for OT1+jkpss on input line
- 104.
+ 110.
+
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
 ) [2]
-(./coursework.aux)
+<./figures/Realised_Rolling_Window_Average_OOS_Return.png, id=66, 1011.78pt x 5
+05.89pt>
+File: ./figures/Realised_Rolling_Window_Average_OOS_Return.png Graphic file (ty
+pe png)
+<use ./figures/Realised_Rolling_Window_Average_OOS_Return.png>
+Package pdftex.def Info: ./figures/Realised_Rolling_Window_Average_OOS_Return.p
+ng  used on input line 123.
+(pdftex.def)             Requested size: 438.17227pt x 219.08774pt.
+<./figures/efficint_frontier.png, id=67, 853.1875pt x 501.875pt>
+File: ./figures/efficint_frontier.png Graphic file (type png)
+<use ./figures/efficint_frontier.png>
+Package pdftex.def Info: ./figures/efficint_frontier.png  used on input line 13
+0.
+(pdftex.def)             Requested size: 438.17227pt x 257.75249pt.
+<./figures/Cumulative_Rets.png, id=68, 853.1875pt x 501.875pt>
+File: ./figures/Cumulative_Rets.png Graphic file (type png)
+<use ./figures/Cumulative_Rets.png>
+Package pdftex.def Info: ./figures/Cumulative_Rets.png  used on input line 137.
+
+(pdftex.def)             Requested size: 438.17227pt x 257.75249pt.
+\tf@thm=\write5
+\openout5 = `coursework.thm'.
+
+ [3 <./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png>] [4 <./figur
+es/Realised_Rolling_Window_Average_OOS_Return.png> <./figures/efficint_frontier
+.png>]
+[5 <./figures/Cumulative_Rets.png>] (./coursework.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `coursework.out' has not changed.
-(rerunfilecheck)             Checksum: EEDAC87749D1E46796C6B696C022C15A;148.
+(rerunfilecheck)             Checksum: 380E8FBC4BEBD161FEF8EF6D7E021CDD;253.
  ) 
 Here is how much of TeX's memory you used:
- 30392 strings out of 474116
- 572595 string characters out of 5743682
- 1943187 words of memory out of 5000000
- 52193 multiletter control sequences out of 15000+600000
- 595526 words of font info for 99 fonts, out of 8000000 for 9000
+ 30445 strings out of 474116
+ 574412 string characters out of 5743682
+ 1945187 words of memory out of 5000000
+ 52236 multiletter control sequences out of 15000+600000
+ 599188 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  104i,11n,104p,5840b,722s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb><
@@ -1441,10 +1476,10 @@ ive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/20
 24/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2024/te
 xmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2024/texmf-
 dist/fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on coursework.pdf (2 pages, 99072 bytes).
+Output written on coursework.pdf (5 pages, 802837 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 137 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 54 words of extra memory for PDF output out of 10000 (max. 10000000)
 
