@@ -7,39 +7,48 @@
 
 using namespace std;
 
+// A function to implement a backtest for each window. Takes as input the optimal weights from the IS returns,
+// the Out of Sample returns, and the target_returns which is linspace(0,21,0.1)
 Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, const Matrix &target_returns);
 
+// command line arguments unused. Please use cmake to compile and run.
 int  main (int  argc, char  *argv[])
 {
 
     int numberAssets=83;
     int numberReturns=700;
+
+    // Lattice is defined in linalg.h, as is Vector
     Lattice returnMatrix(numberAssets, Vector(numberReturns)); // a matrix to store the return data
 
     //read the data from the file and store it into the return matrix
     string fileName="asset_returns.csv";
     readData(returnMatrix,fileName);          // returnMatrix[i][j] stores the asset i, return j value
 
-    Matrix daily_returns(returnMatrix); // Assets - r * Days - c == 83 * 700
+    Matrix daily_returns(returnMatrix); // (Assets -> r) * (Days -> c) == 83 * 700
 
+    // np.linspace(0,21,0.1) ==
     Lattice tr =  {
             {0.   , 0.005, 0.01 , 0.015, 0.02 , 0.025, 0.03 , 0.035, 0.04 ,
             0.045, 0.05 , 0.055, 0.06 , 0.065, 0.07 , 0.075, 0.08 , 0.085,
             0.09 , 0.095, 0.1}
     };
 
+    // Matrix object constructed with Lattice => see linalg.h
     Matrix target_returns(tr);
 
+    // results array of size number of windows of Result structs.
+    // Result struct defined in write_data.h
     Result results[50];
-    for (int i = 0; i < numberReturns - 100; i += 12) {
-        int index = int(i/12);
+    for (int i = 0; i < numberReturns - 100; i += 12) {             // iterating over the starts of each in sample window
+        int index = int(i/12);                                      // for the results array
         cout << "Moving to index " << index << endl;
-        int start = index, mid = index + 100, end = index + 112;
-        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);
+        int start = index, mid = index + 100, end = index + 112;    // start of IS, start of OOS, end of OOS
+        Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);   // splice => see linalg.h
         Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
-        Markowitz portfolio(daily_returns_IS, target_returns);
-        portfolio.weights();
-        Matrix df_optimal_weights = portfolio.weights();
+        Markowitz portfolio(daily_returns_IS, target_returns);      // Markowitz class => see Markowitz.h
+        Matrix df_optimal_weights = portfolio.weights();            // calculate optimal porfolio weights using CGD method of Matrix object
+        // df_act_returns is 21 * 3 Matrix object that contains target return, actual return and portfolio covariance for each target return
         Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
         results[index] = {
                 index,
@@ -63,7 +72,7 @@ Matrix back_testing(const Matrix &optimal_weights, const Matrix &OOS_returns, co
     Matrix results(num_targ_rets, 3);
 
     for (int i = 0; i < num_targ_rets; i++) {
-        // Extract the i-th row of optimal weights
+        // Extracts the i-th row of optimal weights
         Matrix optimal_weights_row(num_assets, 1);
         for (int j = 0; j < num_assets; j++) {
             optimal_weights_row.insert(j, 0, optimal_weights(i, j));

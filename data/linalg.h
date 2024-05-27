@@ -8,6 +8,8 @@
 typedef std::vector<double> Vector;
 typedef std::vector<Vector> Lattice;
 
+#define TOLERANCE 1e-7
+
 class Matrix {
 private:
     int rows, columns;
@@ -16,10 +18,10 @@ public:
     // Default constructor
     Matrix() : rows(0), columns(0), M() {}
 
-    // Construct from pre-existing Matrix
+    // Construct from pre-existing Lattice
     Matrix(Lattice _M) {M = _M; rows = _M.size(); columns = _M[0].size();}
 
-    // Construct an empty matrix with given dimensions
+    // Construct a zero matrix with given dimensions
     Matrix(int _rows, int _columns) : rows(_rows), columns(_columns), M(_rows, Vector(_columns, 0.0)) {}
 
     // Access element (const version)
@@ -51,7 +53,7 @@ public:
         return M[i][j];
     }
 
-    // Unary - operator for matrix
+    // Unary minus operator for matrix
     Matrix operator-() const;
 
     // Splicing operator
@@ -79,7 +81,7 @@ public:
     // Print the matrix
     void prn() const;
 
-    // Alternative solver for testing
+    // Alternative solver for testing - unused in final submission
     void luDecompose(Matrix& L, Matrix& U) const;
 
     Matrix forwardSubstitution(const Matrix& L, const Matrix& b) const;

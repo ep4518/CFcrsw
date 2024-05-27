@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1716635110.91382 "coursework.tex" "coursework.pdf" "coursework" 1716635112.28049 0
+["pdflatex"] 1716826543.41313 "coursework.tex" "coursework.pdf" "coursework" 1716826544.76967 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/bitstrea/charter/bchb7t.tfm" 1136768653 2732 006d846b4d54f9b40899c7c3eecd771a ""
@@ -224,9 +224,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1716456424.17834 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1716456330 8221425 911aa87cbe93e5365cf590f7d9f27fe5 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "coursework.aux" 1716635112.19068 1521 a7367e28c61c271dce552d0812b91f4d "pdflatex"
-  "coursework.out" 1716635112.19157 253 380e8fbc4bebd161fef8ef6d7e021cdd "pdflatex"
-  "coursework.tex" 1716635107.82817 16464 812541f9229203cdd14315b9e19a548a ""
+  "coursework.aux" 1716826544.67857 1791 1d74c019601f2b965ebaa4a2d607ebe2 "pdflatex"
+  "coursework.out" 1716826544.67944 253 380e8fbc4bebd161fef8ef6d7e021cdd "pdflatex"
+  "coursework.tex" 1716826543.2849 17110 ac23a1e674deb9a426fa48a9af543bee ""
   "dsfont.sty" 1716484577.56647 241 be3809ccb4cf1794d83bc1a56b0aa2db ""
   "figures/Cumulative_Rets.png" 1716634904.84187 175739 42f1767f1a22fea3f2f393486b5328f1 ""
   "figures/Realised_Rolling_Window_Average_OOS_Return.png" 1716628381.56089 317550 72629fc1bf577db3a7d8ff4e60557726 ""

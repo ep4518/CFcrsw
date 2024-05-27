@@ -16,19 +16,19 @@ public:
         }
         returns = _returns; target_returns = _target_returns, n = _returns.getRows();}
 
-    // Mean returns - Working
+    // Mean returns
     Matrix mean();
 
-    // Covariance matrix - Working
+    // Covariance matrix
     Matrix cov();
 
-    // Q matrix - Working
+    // Q matrix
     Matrix Q();
 
-    // b Vector - Working
+    // b Vector
     Matrix b(const double &target_return);
 
-    // weights dataframe - Not Working
+    // weights dataframe
     Matrix weights();
 
 };

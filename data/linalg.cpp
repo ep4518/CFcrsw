@@ -5,9 +5,9 @@
 
 void Matrix::prn() const {
     std::cout << "[\n";
-    for (const auto& row : M) {
+    for (const Vector& row : M) {
         std::cout << " [ ";
-        for (const auto& elem : row) {
+        for (const double& elem : row) {
             std::cout << elem << " ";
         }
         std::cout << "]\n";
@@ -62,7 +62,7 @@ Matrix Matrix::solver(const Matrix &b) const {
         x = x + alpha * p;
         r = r - alpha * Ap;
         rsnew = r.dot(r);
-        if (std::sqrt(rsnew) < 1e-7) break;
+        if (std::sqrt(rsnew) < TOLERANCE) break;
         p = r + (rsnew / rsold) * p;
         rsold = rsnew;
     }

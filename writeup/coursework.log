@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.23)  25 MAY 2024 12:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.5.23)  27 MAY 2024 17:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1424,33 +1424,62 @@ LaTeX Font Info:    Trying to load font information for OT1+jkpss on input line
 (/usr/local/texlive/2024/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
 ) [2]
-<./figures/Realised_Rolling_Window_Average_OOS_Return.png, id=66, 1011.78pt x 5
+Underfull \hbox (badness 10000) in paragraph at lines 113--115
+
+ []
+
+<./figures/Realised_Rolling_Window_Average_OOS_Return.png, id=65, 1011.78pt x 5
 05.89pt>
 File: ./figures/Realised_Rolling_Window_Average_OOS_Return.png Graphic file (ty
 pe png)
 <use ./figures/Realised_Rolling_Window_Average_OOS_Return.png>
 Package pdftex.def Info: ./figures/Realised_Rolling_Window_Average_OOS_Return.p
-ng  used on input line 123.
+ng  used on input line 118.
 (pdftex.def)             Requested size: 438.17227pt x 219.08774pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--125
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--128
+\OT1/bch/m/n/12 mar-ket).
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--128
+
+ []
+
 <./figures/efficint_frontier.png, id=67, 853.1875pt x 501.875pt>
 File: ./figures/efficint_frontier.png Graphic file (type png)
 <use ./figures/efficint_frontier.png>
 Package pdftex.def Info: ./figures/efficint_frontier.png  used on input line 13
-0.
+1.
 (pdftex.def)             Requested size: 438.17227pt x 257.75249pt.
-<./figures/Cumulative_Rets.png, id=68, 853.1875pt x 501.875pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
+\OT1/bch/m/n/12 low-ing for in-ver-sion in pe-ri-ods of neg-a-tive mar-ket re-t
+urns.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--138
+
+ []
+
+<./figures/Cumulative_Rets.png, id=69, 853.1875pt x 501.875pt>
 File: ./figures/Cumulative_Rets.png Graphic file (type png)
 <use ./figures/Cumulative_Rets.png>
-Package pdftex.def Info: ./figures/Cumulative_Rets.png  used on input line 137.
+Package pdftex.def Info: ./figures/Cumulative_Rets.png  used on input line 141.
 
 (pdftex.def)             Requested size: 438.17227pt x 257.75249pt.
 \tf@thm=\write5
 \openout5 = `coursework.thm'.
 
- [3 <./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png>] [4 <./figur
-es/Realised_Rolling_Window_Average_OOS_Return.png> <./figures/efficint_frontier
-.png>]
-[5 <./figures/Cumulative_Rets.png>] (./coursework.aux)
+[3 <./figures/Realised_Rolling_Window_Average_OOS_Return_cpp.png>] [4 <./figure
+s/Realised_Rolling_Window_Average_OOS_Return.png> <./figures/efficint_frontier.
+png>] [5 <./figures/Cumulative_Rets.png>] (./coursework.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1476,10 +1505,10 @@ ive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/20
 24/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texlive/2024/te
 xmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2024/texmf-
 dist/fonts/type1/public/kpfonts/jkpsy.pfb>
-Output written on coursework.pdf (5 pages, 802837 bytes).
+Output written on coursework.pdf (5 pages, 803648 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 140 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
  12 named destinations out of 1000 (max. 500000)
  54 words of extra memory for PDF output out of 10000 (max. 10000000)
 

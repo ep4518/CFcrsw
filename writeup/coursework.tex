@@ -42,7 +42,7 @@
         \item optimal\_weights(): $Q x = b$
     \end{itemize}
     \item backtesting function implemented for each iteration in the rolling window
-    \item write array of result structs in csv form for plotting with python - write\_data.h
+    \item wrote array of result structs in csv form for plotting with python - write\_data.h
 \end{itemize}
 
 \vspace{1cm}
@@ -83,7 +83,7 @@
 
 % Actors and Objects
 \node[actor] (user) {Main};
-\node[actor, right=of user, xshift=1cm] (system) {i=0, i=12, ..., i = 600};
+\node[actor, right=of user, xshift=1cm] (system) {i=0, i=12, ..., i=600-12};
 \node[actor, right=of system] (third) {Portfolio - In Sample};
 \node[actor, below=of third] (fourth) {Backtest};
 \node[actor, left=of fourth] (fifth) {Daily Returns - Out of Sample};
@@ -110,13 +110,8 @@
 \end{figure}
 
 
-Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for each target over the course of the backtest. There are 50 periods in the backtest, indexed on the x-axis of the plot. Out of Sample performance of the Markowtiz model is poor. The cumulative performance over the enitre domain is worse the larger the target return becomes. 
-
-
-In evaluating the accuracy of our Markowitz implementation, we compare with a quick numpy implementation in python, where the use of the linalg library provides a relaible yardstick with which to measure the accuracy of the CGD solver in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase.
-
-
-In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns consistent with the amount of risk taken by the investor (where the magnitude and direction of those returns are dictated by those of the market). 
+Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for each target over the course of the backtest. There are 50 periods in the backtest indexed on the x-axis of the plot. Out of sample performance of the Markowtiz model is poor. The cumulative performance over the enitre domain is worse the larger the target return becomes. 
+\linebreak
 
 \begin{figure}[]
 \centering % this centers the figure
@@ -125,19 +120,31 @@ In both cases, the Markowitz portfolio effectively captures the market Beta, and
 \label{fig:OOS_rets_python}
 \end{figure}
 
+To evaluate the accuracy of our Markowitz implementation, we compare with a numpy analog, where the use of the linalg library provides a relaible solver to measure the accuracy of the conjugate gradient descent algorithm (CGD) in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase.
+\linebreak
+
+In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns that scale consistently with the amount of risk taken by the investor (where the magnitude and direction of those returns are dictated by those of the market). 
+\linebreak
+
 \begin{figure}[]
 \centering % this centers the figure
 \includegraphics[width = 1.0\hsize]{./figures/efficint_frontier.png} % span 1.0 times the horizontal size of the page
-    \caption{} 
+\caption{Efficient Frontier with Optimal Portfolios (Backtest Period 9)} 
 \label{fig:efficint_frontier}
 \end{figure}
+
+Figure ~\ref{fig:efficint_frontier} demonstrates the Sharpe ratio of the portfolios for an example backtest period. In general, we observed this classic efficient frontier shape in most periods, allowing for inversion in periods of negative market returns. 
+\linebreak
 
 \begin{figure}[]
 \centering % this centers the figure
 \includegraphics[width = 1.0\hsize]{./figures/Cumulative_Rets.png} % span 1.0 times the horizontal size of the page
-\caption{} 
+\caption{Cumulative Returns of Optimized Portfolio vs. Assets (Backtest Period 9, Target R 0.04)}
 \label{fig:Cumulative_Rets}
 \end{figure}
+
+Figure ~\ref{fig:Cumulative_Rets} portrays a cumulative portfolio return next to its constituent assets. As with Figure ~\ref{fig:efficint_frontier}, this Figure is a product of selection bias.
+
 
 \end{document}
 
