@@ -62,13 +62,22 @@ Matrix Markowitz::weights() {
 
     // For each target return
     for (int i = 0; i < m; i++) {
-        Matrix x = this->Q().solver(this->b(target_returns(0, i)));
+        Matrix x = this->Q().solver(this->b(target_returns(0, i)), TOLERANCE, NODEBUG);
 
         // insert the x vector into the optimal weights matrix
         for (int j = 0; j < this->n + 2; j++) {
             results.insert(i, j, x(j, 0));
         }
     }
+    this->optimal_weights=results;
     return results;
 }
 
+void Markowitz::NormTest() {
+    Matrix Q = this->Q();
+    for (int i = 0; i < target_returns.getColumns(); i++) {
+        double tr = target_returns(0,i);
+        Matrix bx = b(tr);
+        std::cout << "Norm for target return " << tr << ":   " << (Q * this->optimal_weights(i,i+1,0,85).transpose() - bx).norm() << std::endl;
+    }
+}

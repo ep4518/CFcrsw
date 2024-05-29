@@ -1,6 +1,8 @@
 clc;
 clear;
 data=load('asset_returns.csv');
+z = 36;
+data=data(1+z:100+z,:);
 assets=83;
 tR=0.03;
 means=zeros(assets,1);
@@ -16,11 +18,13 @@ e=ones(assets,1);
 A=[covMat,-means,-e; -means',0,0;-e',0,0];
 rh=[zeros(assets,1);-tR;-1];
 
-sol=A\rh
+sol=A\rh;
 
 x=ones(assets+2,1);
 x=conjgrad(A, rh, x);
 
+norm(A*x-rh)
+norm(A*sol-rh)
 norm(sol-x)
 
 

@@ -8,8 +8,6 @@
 typedef std::vector<double> Vector;
 typedef std::vector<Vector> Lattice;
 
-#define TOLERANCE 1e-7
-
 class Matrix {
 private:
     int rows, columns;
@@ -64,7 +62,7 @@ public:
     // Skip inversion. Utilise conjugate gradient algorithm (see .pdf/ wiki)
     // Mx = b => x*
     //  https://en.wikipedia.org/wiki/Conjugate_gradient_method
-    Matrix solver(const Matrix &b) const;
+    Matrix solver(const Matrix &b, const double tol, const int debug) const;
 
     // Matrix multiplication
     friend Matrix operator*(const Matrix& A, const Matrix& B);
@@ -81,14 +79,8 @@ public:
     // Print the matrix
     void prn() const;
 
-    // Alternative solver for testing - unused in final submission
-    void luDecompose(Matrix& L, Matrix& U) const;
+    double norm();
 
-    Matrix forwardSubstitution(const Matrix& L, const Matrix& b) const;
-
-    Matrix backwardSubstitution(const Matrix& U, const Matrix& y) const;
-
-    Matrix solveLU(const Matrix& b) const;
 };
 
 // hstack and vstack for constructing Q

@@ -484,11 +484,21 @@ INPUT ./figures/Cumulative_Rets.png
 INPUT ./figures/Cumulative_Rets.png
 INPUT ./figures/Cumulative_Rets.png
 INPUT ./figures/Cumulative_Rets.png
-OUTPUT coursework.thm
+INPUT ./figures/Cumulative_returns.png
+INPUT ./figures/Cumulative_returns.png
+INPUT ./figures/Cumulative_returns.png
+INPUT ./figures/Cumulative_returns.png
+INPUT ./figures/Cumulative_returns.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/vf/bitstrea/charter/bchb7t.vf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/bitstrea/charter/bchb8r.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/vf/bitstrea/charter/bchr7t.vf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm
+INPUT ./figures/ss.png
+INPUT ./figures/ss.png
+INPUT ./figures/ss.png
+INPUT ./figures/ss.png
+INPUT ./figures/ss.png
+OUTPUT coursework.thm
 INPUT coursework.aux
 INPUT ./coursework.out
 INPUT ./coursework.out
@@ -502,3 +512,4 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/kpfonts/jkpsyb.pfb

@@ -42,29 +42,50 @@ Matrix Matrix::transpose() const {
 }
 
 // Conjugate Gradient Solver
-Matrix Matrix::solver(const Matrix &b) const {
+Matrix Matrix::solver(const Matrix &b, const double tol, const int debug) const {
     if (M.empty() || rows != columns) {
         throw std::invalid_argument("Matrix dimensions are not compatible for inversion");
     }
     if (b.getColumns() != 1 || b.getRows() != rows) {
         throw std::invalid_argument("b must be a column vector with the same number of rows as the matrix.");
     }
-
     Matrix x(Lattice(rows, Vector(1, 1.0)));
     Matrix r = b - (*this) * x;
     Matrix p = r;
     double rsold = r.dot(r);
     double rsnew;
-
-    for (int k = 0; k < b.getRows(); ++k) {
-        Matrix Ap = (*this) * p;
-        double alpha = rsold / p.dot(Ap);
-        x = x + alpha * p;
-        r = r - alpha * Ap;
-        rsnew = r.dot(r);
-        if (std::sqrt(rsnew) < TOLERANCE) break;
-        p = r + (rsnew / rsold) * p;
-        rsold = rsnew;
+    if (debug == 1) {
+        std::cout << "x.norm() " << x.norm() << std::endl;
+        std::cout << "r.norm() " << r.norm() << std::endl;
+        for (int k = 0; k < b.getRows(); ++k) {
+            Matrix Ap = (*this) * p;
+            std::cout << "Ap.norm() " << Ap.norm() << std::endl;
+            double alpha = rsold / p.dot(Ap);
+            std::cout << "alpha " << alpha << std::endl;
+            x = x + alpha * p;
+            std::cout << "x.norm() " << x.norm() << std::endl;
+            r = r - alpha * Ap;
+            std::cout << "r.norm() " << r.norm() << std::endl;
+            rsnew = r.dot(r);
+            std::cout << "rsnew " << rsnew << std::endl;
+            if (std::sqrt(rsnew) < tol) break;
+            p = r + (rsnew / rsold) * p;
+            std::cout << "p.norm() " << p.norm() << std::endl;
+            rsold = rsnew;
+            std::cout << "rsold " << rsold << std::endl;
+        }
+    }
+    else {
+        for (int k = 0; k < b.getRows(); ++k) {
+            Matrix Ap = (*this) * p;
+            double alpha = rsold / p.dot(Ap);
+            x = x + alpha * p;
+            r = r - alpha * Ap;
+            rsnew = r.dot(r);
+            if (std::sqrt(rsnew) < tol) break;
+            p = r + (rsnew / rsold) * p;
+            rsold = rsnew;
+        }
     }
 
     return x;
@@ -148,74 +169,12 @@ double Matrix::dot(const Matrix& A) const {
     return result;
 }
 
-// LU Decomposition Solver
-void Matrix::luDecompose(Matrix& L, Matrix& U) const {
-    if (rows != columns) {
-        throw std::invalid_argument("Matrix must be square for LU decomposition.");
+double Matrix::norm() {
+    double result = 0.0;
+    for (int i = 0; i < rows; i++) {
+        result += pow(M[i][0], 2.0);
     }
-    int n = rows;
-    L = Matrix(n, n);
-    U = *this;
-
-    for (int i = 0; i < n; ++i) {
-        for (int k = i; k < n; ++k) {
-            double sum = 0.0;
-            for (int j = 0; j < i; ++j) {
-                sum += (L(i, j) * U(j, k));
-            }
-            U(i, k) -= sum;
-        }
-        for (int k = i; k < n; ++k) {
-            if (i == k) {
-                L(i, i) = 1.0;
-            } else {
-                double sum = 0.0;
-                for (int j = 0; j < i; ++j) {
-                    sum += (L(k, j) * U(j, i));
-                }
-                L(k, i) = (U(k, i) - sum) / U(i, i);
-            }
-        }
-    }
-}
-
-Matrix Matrix::forwardSubstitution(const Matrix& L, const Matrix& b) const {
-    int n = L.getRows();
-    Matrix y(n, 1);
-    for (int i = 0; i < n; ++i) {
-        double sum = 0.0;
-        for (int j = 0; j < i; ++j) {
-            sum += L(i, j) * y(j, 0);
-        }
-        y(i, 0) = (b(i, 0) - sum) / L(i, i);
-    }
-    return y;
-}
-
-Matrix Matrix::backwardSubstitution(const Matrix& U, const Matrix& y) const {
-    int n = U.getRows();
-    Matrix x(n, 1);
-    for (int i = n - 1; i >= 0; --i) {
-        double sum = 0.0;
-        for (int j = i + 1; j < n; ++j) {
-            sum += U(i, j) * x(j, 0);
-        }
-        x(i, 0) = (y(i, 0) - sum) / U(i, i);
-    }
-    return x;
-}
-
-Matrix Matrix::solveLU(const Matrix& b) const {
-    if (b.getColumns() != 1 || b.getRows() != rows) {
-        throw std::invalid_argument("b must be a column vector with the same number of rows as the matrix.");
-    }
-
-    Matrix L, U;
-    luDecompose(L, U);
-
-    Matrix y = forwardSubstitution(L, b);
-    Matrix x = backwardSubstitution(U, y);
-    return x;
+    return sqrt(result);
 }
 
 // Vertical stack of three matrices

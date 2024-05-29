@@ -3,10 +3,14 @@
 
 #include "linalg.h"
 
+#define TOLERANCE 1e-10
+typedef enum {NODEBUG, DEBUG};
+
 class Markowitz {
 private:
     Matrix returns;
     Matrix target_returns;
+    Matrix optimal_weights;
     int n;
 
 public:
@@ -14,7 +18,9 @@ public:
         if (_target_returns.getRows() != 1) {
             throw std::invalid_argument("target returns should be a column vector");
         }
-        returns = _returns; target_returns = _target_returns, n = _returns.getRows();}
+        returns = _returns; target_returns = _target_returns, n = _returns.getRows();
+        this->weights();
+    }
 
     // Mean returns
     Matrix mean();
@@ -30,6 +36,10 @@ public:
 
     // weights dataframe
     Matrix weights();
+
+    Matrix getWeights() {return this->optimal_weights;}
+
+    void NormTest();
 
 };
 

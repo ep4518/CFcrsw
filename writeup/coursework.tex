@@ -120,10 +120,10 @@ Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for 
 \label{fig:OOS_rets_python}
 \end{figure}
 
-To evaluate the accuracy of our Markowitz implementation, we compare with a numpy analog, where the use of the linalg library provides a relaible solver to measure the accuracy of the conjugate gradient descent algorithm (CGD) in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase.
+To evaluate the accuracy of our Markowitz implementation, we contrast with a numpy analog, where the use of the linalg library provides a relaible solver to compare the accuracy of the conjugate gradient descent algorithm (CGD) in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase. Following extensive debugging, these differences were also observed in the Matlab conjgrad.m implementation. Any CGD solver used had $\lVert Qx - b \rVert \thickapprox e^{-5}$ for the range of target returns, where as for prebuilt solvers the norm value usually lies in the range $\thickapprox e^{-11}$.
 \linebreak
 
-In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns that scale consistently with the amount of risk taken by the investor (where the magnitude and direction of those returns are dictated by those of the market). 
+In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns that scale consistently with the amount of risk taken by the investor (where the magnitude and direction of those returns is dictated by those of the market). 
 \linebreak
 
 \begin{figure}[]
@@ -144,6 +144,20 @@ Figure ~\ref{fig:efficint_frontier} demonstrates the Sharpe ratio of the portfol
 \end{figure}
 
 Figure ~\ref{fig:Cumulative_Rets} portrays a cumulative portfolio return next to its constituent assets. As with Figure ~\ref{fig:efficint_frontier}, this Figure is a product of selection bias.
+
+\begin{figure}[]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/Cumulative_returns.png} % span 1.0 times the horizontal size of the page
+\caption{Cumulative Returns of Optimal Portfolios (No Frictions)}
+\label{fig:cuml rets}
+\end{figure}
+
+\begin{figure}[]
+\centering % this centers the figure
+\includegraphics[width = 1.0\hsize]{./figures/ss.png} % span 1.0 times the horizontal size of the page
+\caption{Matlab}
+\label{fig: Matlab}
+\end{figure}
 
 
 \end{document}

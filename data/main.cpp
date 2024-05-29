@@ -37,6 +37,10 @@ int  main (int  argc, char  *argv[])
     // Matrix object constructed with Lattice => see linalg.h
     Matrix target_returns(tr);
 
+    Matrix daily_returns_test = daily_returns(0, numberAssets, 360, 460);
+    Markowitz portfolio(daily_returns_test, target_returns);
+    portfolio.NormTest();
+
     // results array of size number of windows of Result structs.
     // Result struct defined in write_data.h
     Result results[50];
@@ -47,7 +51,7 @@ int  main (int  argc, char  *argv[])
         Matrix daily_returns_IS = daily_returns(0, numberAssets, start, mid);   // splice => see linalg.h
         Matrix daily_returns_OOS = daily_returns(0, numberAssets, mid, end);
         Markowitz portfolio(daily_returns_IS, target_returns);      // Markowitz class => see Markowitz.h
-        Matrix df_optimal_weights = portfolio.weights();            // calculate optimal porfolio weights using CGD method of Matrix object
+        Matrix df_optimal_weights = portfolio.getWeights();            // calculate optimal porfolio weights using CGD method of Matrix object
         // df_act_returns is 21 * 3 Matrix object that contains target return, actual return and portfolio covariance for each target return
         Matrix df_act_returns = back_testing(df_optimal_weights, daily_returns_OOS, target_returns);
         results[index] = {
