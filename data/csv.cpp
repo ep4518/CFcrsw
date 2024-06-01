@@ -1,5 +1,4 @@
-
-
+//csv.cpp
 #include "csv.h"
 
 // endofline: check for and consume \r, \n, \r\n, or EOF
@@ -96,4 +95,3 @@ string Csv::getfield(int n)
 	else
 		return field[n];
 }
-
