@@ -41,7 +41,7 @@
         \item b(double target\_return), Q() - vstack(hstack, hstack, hstack)
         \item optimal\_weights(): $Q x = b$
     \end{itemize}
-    \item backtesting function implemented for each iteration in the rolling window
+    \item backtesting function called for each iteration in the rolling window
     \item wrote array of result structs in csv form for plotting with python - write\_data.h
 \end{itemize}
 
@@ -110,7 +110,7 @@
 \end{figure}
 
 
-Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for each target over the course of the backtest. There are 50 periods in the backtest indexed on the x-axis of the plot. Out of sample performance of the Markowtiz model is poor. The cumulative performance over the enitre domain is slightly better the larger the target return becomes (Fig. ~\ref{fig:cuml_rets}).\\
+Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for each target over the course of the backtest. There are 50 periods in the backtest indexed on the x-axis of the plot. Out of sample performance of the Markowtiz model is poor. The cumulative performance over the enitre domain is slightly better the larger the target return becomes (Fig. ~\ref{fig:cuml_rets}); the overall cumulative performance is positive.\\
 
 \begin{figure}[]
 \centering 
@@ -121,10 +121,10 @@ Fig.~\ref{fig:OOS_rets} portrays the rolling window realised average return for 
 
 To evaluate the accuracy of our Markowitz implementation (Fig.~\ref{fig:OOS_rets}), we contrast with a numpy analog, where the linalg library provides a relaible solver to compare the accuracy of the conjugate gradient descent algorithm (CGD) in cpp. Fig.~\ref{fig:OOS_rets_python} shows the drastic impact of the fractional differences in optimal weights we see whilst solving with CGD, on the overall performance during the backtesting phase. Following extensive debugging, these differences were also observed in the Matlab conjgrad.m implementation. Any CGD solver used had $\lVert Qx - b \rVert \thickapprox e^{-5}$ for the range of target returns during backtesting (Fig.~\ref{fig:Matlab}), where as for prebuilt solvers the norm value usually lies in the range $\thickapprox e^{-11}$. \\
 
-In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns that scale consistently with the amount of risk taken by the investor (Fig.~\ref{fig:eff_front_all}) (where the magnitude and direction of those returns is dictated by those of the market). Fig.~\ref{fig:efficint_frontier} demonstrates the Sharpe ratio of the portfolios for an example backtest period. In general, we observed this classic efficient frontier shape in most periods, allowing for inversion in periods of negative market returns. 
+In both cases, the Markowitz portfolio effectively captures the market Beta, and produces returns that scale consistently with the amount of risk taken by the investor (Fig.~\ref{fig:eff_front_all}); where the magnitude and direction of those returns is dictated by those of the market. Fig.~\ref{fig:efficint_frontier} demonstrates the Sharpe ratio of the portfolios for an example backtest period. In general, we observed this classic efficient frontier shape in most periods, allowing for inversion in periods of negative market returns. 
 \\
 
-Fig.~\ref{fig:Cumulative_Rets} portrays a cumulative portfolio return next to its constituent assets. As with Fig.~\ref{fig:efficint_frontier}, this figure is a product of selection bias.
+Fig.~\ref{fig:Cumulative_Rets} portrays a cumulative portfolio return next to its constituent assets. As with Fig.~\ref{fig:efficint_frontier}, this figure is an example and has been selected with bias.
 
 \begin{figure}[]
     \centering
